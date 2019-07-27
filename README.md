@@ -12,3 +12,22 @@ LambdaPropertyUtils.getPropertyList(Model::getId, Model::getName);
 //获取属性数组
 LambdaPropertyUtils.getProperties(Model::getId, Model::getName);
 ```
+
+
+## 引入方式
+
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>com.github.joker-pper</groupId>
+            <artifactId>lambda-property</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
