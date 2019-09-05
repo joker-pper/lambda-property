@@ -11,6 +11,9 @@ LambdaPropertyUtils.getPropertyList(Model::getId, Model::getName);
 
 //获取属性数组
 LambdaPropertyUtils.getProperties(Model::getId, Model::getName);
+
+//获取属性名称
+LambdaPropertyUtils.getProperty(Model::getId);
 ```
 
 
@@ -28,6 +31,6 @@ LambdaPropertyUtils.getProperties(Model::getId, Model::getName);
         <dependency>
             <groupId>com.github.joker-pper</groupId>
             <artifactId>lambda-property</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.1-SNAPSHOT</version>
         </dependency>
     </dependencies>

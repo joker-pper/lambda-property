@@ -8,8 +8,7 @@ public class LambdaPropertyUtils {
     public static <T> List<String> getPropertyList(LambdaPropertyFunction<T, ?>... propertyFunctions) {
         List<String> propertyList = new ArrayList<>(16);
         for (LambdaPropertyFunction propertyFunction : propertyFunctions) {
-            SerializedLambda serializedLambda = LambdaUtils.resolve(propertyFunction);
-            propertyList.add(serializedLambda.methodToProperty(serializedLambda.getImplMethodName()));
+            propertyList.add(getProperty(propertyFunction));
         }
         return propertyList;
     }
@@ -17,6 +16,11 @@ public class LambdaPropertyUtils {
     public static <T> String[] getProperties(LambdaPropertyFunction<T, ?>... propertyFunctions) {
         List<String> propertyList = getPropertyList(propertyFunctions);
         return propertyList.toArray(new String[propertyList.size()]);
+    }
+
+    public static <T> String getProperty(LambdaPropertyFunction<T, ?> propertyFunction) {
+        SerializedLambda serializedLambda = LambdaUtils.resolve(propertyFunction);
+        return serializedLambda.methodToProperty(serializedLambda.getImplMethodName());
     }
 
 }
