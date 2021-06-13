@@ -11,10 +11,13 @@ import java.util.function.Function;
 
 public class LambdaUtils {
 
+    private LambdaUtils() {
+    }
+
     /**
      * SerializedLambda 反序列化缓存
      */
-    private static final Map<Class<?>, WeakReference<SerializedLambda>> FUNC_CACHE = new ConcurrentHashMap<>();
+    private static final Map<Class<?>, WeakReference<SerializedLambda>> FUNC_CACHE = new ConcurrentHashMap<>(32);
 
     public static <T> SerializedLambda resolve(Function<T, ?> func) {
         Class<?> clazz = func.getClass();

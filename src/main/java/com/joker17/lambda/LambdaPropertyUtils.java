@@ -5,6 +5,9 @@ import java.util.List;
 
 public class LambdaPropertyUtils {
 
+    private LambdaPropertyUtils() {
+    }
+
     public static <T> List<String> getPropertyList(LambdaPropertyFunction<T, ?>... propertyFunctions) {
         List<String> propertyList = new ArrayList<>(16);
         for (LambdaPropertyFunction propertyFunction : propertyFunctions) {
