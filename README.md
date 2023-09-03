@@ -1,6 +1,6 @@
 ## lambda-property
 
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.joker-pper/lambda-property.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22io.github.joker-pper%22%20AND%20a:%22lambda-property%22)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.joker-pper/lambda-property.svg?label=Maven%20Central)](https://central.sonatype.com/search?q=io.github.joker-pper:lambda-property)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 
