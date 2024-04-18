@@ -16,7 +16,7 @@ public class LambdaPropertyUtils {
      * @return
      */
     public static <T> List<String> getPropertyList(LambdaPropertyFunction<T, ?>... propertyFunctions) {
-        List<String> propertyList = new ArrayList<>(16);
+        List<String> propertyList = new ArrayList<>(propertyFunctions.length);
         for (LambdaPropertyFunction propertyFunction : propertyFunctions) {
             propertyList.add(getProperty(propertyFunction));
         }

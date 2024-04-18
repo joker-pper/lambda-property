@@ -20,9 +20,21 @@ LambdaPropertyUtils.getProperties(Model::getId, Model::getName);
 LambdaPropertyUtils.getProperty(Model::getId);
 ```
 
-## 注意
+## 字段命名及类型注意
 
 ```
+
+## 【命名】若字段名第二个字母为大写，则不再将第一个字母转换为小写（故第二个字母为大写时，第一个字母也应该为大写）
+### 除非生成的getter方法的字段名的第一个字母为小写 （lombok默认生成的getter的字段名的第一个字母为大写 ）
+
+
+String cN ==> getter: getCN() -> property: CN  
+String CN ==> getter: getCN() -> property: CN  
+String aNbs ==> getter: getANbs() -> property: ANbs  
+
+### 只有这样的getter方法才会保留首字母为小写
+String bNFromCustomGetter ==> getter: getbNFromCustomGetter() -> property: bNFromCustomGetter  
+
 
 ## boolean类型时需要注意
 
