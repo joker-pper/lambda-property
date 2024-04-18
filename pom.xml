@@ -6,7 +6,7 @@
 
     <groupId>io.github.joker-pper</groupId>
     <artifactId>lambda-property</artifactId>
-    <version>1.2</version>
+    <version>1.2.1</version>
     <name>lambda property</name>
     <description>通过lambda表达式获取实体类的属性名称的工具包</description>
     <url>http://github.com/joker-pper/lambda-property</url>
@@ -37,7 +37,7 @@
         <nexus-staging-maven-plugin.version>1.6.7</nexus-staging-maven-plugin.version>
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-        <maven-javadoc-plugin.version>2.9.1</maven-javadoc-plugin.version>
+        <maven-javadoc-plugin.version>3.3.2</maven-javadoc-plugin.version>
         <lombok.version>1.18.24</lombok.version>
         <junit.version>4.13.1</junit.version>
     </properties>
