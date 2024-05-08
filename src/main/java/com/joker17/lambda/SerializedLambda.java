@@ -16,6 +16,7 @@
 package com.joker17.lambda;
 
 import java.io.*;
+import java.lang.invoke.MethodHandleInfo;
 import java.util.Locale;
 import java.util.function.Function;
 import java.util.regex.Matcher;
@@ -39,10 +40,6 @@ public class SerializedLambda implements Serializable {
     private Object[] capturedArgs;
 
     public static SerializedLambda resolve(Function<?, ?> lambda) {
-        if (!lambda.getClass().isSynthetic()) {
-            throw new IllegalArgumentException("该方法仅能传入 lambda 表达式产生的合成类");
-        }
-
         try (ObjectInputStream objIn = new ObjectInputStream(new ByteArrayInputStream(LambdaUtils.serialize(lambda))) {
             @Override
             protected Class<?> resolveClass(ObjectStreamClass objectStreamClass) throws IOException, ClassNotFoundException {
@@ -56,13 +53,90 @@ public class SerializedLambda implements Serializable {
         }
     }
 
+
     /**
-     * 获取接口 class
+     * 获取捕获此lambda的 class
+     *
+     * @return 返回 class
+     */
+    public Class<?> getCapturingClass() {
+        return capturingClass;
+    }
+
+    /**
+     * 获取捕获此lambda的类的名称
+     *
+     * @return 返回 class 名称
+     */
+    public String getCapturingClassName() {
+        return normalName(capturingClass.getName());
+    }
+
+
+    /**
+     * Get the name of the primary method for the functional interface
+     * to which this lambda has been converted.
+     *
+     * @return
+     */
+    public String getFunctionalInterfaceMethodName() {
+        return functionalInterfaceMethodName;
+    }
+
+    /**
+     * Get the signature of the primary method for the functional
+     * interface to which this lambda has been converted.
+     *
+     * @return the signature of the primary method of the functional
+     * interface
+     */
+    public String getFunctionalInterfaceMethodSignature() {
+        return functionalInterfaceMethodSignature;
+    }
+
+    /**
+     * Get the signature of the implementation method.
+     *
+     * @return the signature of the implementation method
+     */
+    public String getImplMethodSignature() {
+        return implMethodSignature;
+    }
+
+    /**
+     * 获取实现方法的方法句柄类型 （see {@link MethodHandleInfo}）
+     *
+     * @return int值
+     */
+    public int getImplMethodKind() {
+        return implMethodKind;
+    }
+
+    /**
+     * Get the count of dynamic arguments to the lambda capture site.
+     *
+     * @return the count of dynamic arguments to the lambda capture site
+     */
+    public int getCapturedArgCount() {
+        return capturedArgs.length;
+    }
+
+    /**
+     * 获取接口 class名称
      *
      * @return 返回 class 名称
      */
     public String getFunctionalInterfaceClassName() {
         return normalName(functionalInterfaceClass);
+    }
+
+    /**
+     * 获取接口 class
+     *
+     * @return 返回 class
+     */
+    public Class<?> getFunctionalInterfaceClass() {
+        return forName(getFunctionalInterfaceClassName());
     }
 
     /**
@@ -75,7 +149,7 @@ public class SerializedLambda implements Serializable {
     }
 
     /**
-     * 获取 class 的名称
+     * 获取实现的 class 的名称
      *
      * @return 类名
      */
@@ -104,7 +178,19 @@ public class SerializedLambda implements Serializable {
 
     private static final Pattern INSTANTIATED_METHOD_TYPE = Pattern.compile("\\(L(?<instantiatedMethodType>[\\S&&[^;)]]+);\\)L[\\S]+;");
 
-    public Class getInstantiatedMethodType() {
+    /**
+     * Get the signature of the primary functional interface method
+     * after type variables are substituted with their instantiation
+     * from the capture site.
+     *
+     * @return the signature of the primary functional interface method
+     * after type variable processing
+     */
+    public String getInstantiatedMethodType() {
+        return instantiatedMethodType;
+    }
+
+    public Class<?> getInstantiatedMethodTypeClass() {
         Matcher matcher = INSTANTIATED_METHOD_TYPE.matcher(instantiatedMethodType);
         if (matcher.find()) {
             return forName(normalName(matcher.group("instantiatedMethodType")));
@@ -112,8 +198,7 @@ public class SerializedLambda implements Serializable {
         throw new RuntimeException(String.format("无法从 %s 解析调用实例。。。", instantiatedMethodType));
     }
 
-
-    private Class forName(String className) {
+    private Class<?> forName(String className) {
         try {
             return Class.forName(className);
         } catch (ClassNotFoundException e) {
@@ -162,7 +247,7 @@ public class SerializedLambda implements Serializable {
     @Override
     public String toString() {
         return String.format("%s -> %s::%s", getFunctionalInterfaceClassName(), getImplClass().getSimpleName(),
-            implMethodName);
+                implMethodName);
     }
 
 }

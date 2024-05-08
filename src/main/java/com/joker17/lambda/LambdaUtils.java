@@ -7,7 +7,6 @@ import java.lang.ref.WeakReference;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Function;
 
 public class LambdaUtils {
 
@@ -19,7 +18,7 @@ public class LambdaUtils {
      */
     private static final Map<Class<?>, WeakReference<SerializedLambda>> FUNC_CACHE = new ConcurrentHashMap<>(1024);
 
-    public static <T> SerializedLambda resolve(Function<T, ?> func) {
+    public static <T> SerializedLambda resolve(LambdaPropertyFunction<T, ?> func) {
         Class<?> clazz = func.getClass();
         return Optional.ofNullable(FUNC_CACHE.get(clazz))
                 .map(WeakReference::get)
@@ -47,19 +46,22 @@ public class LambdaUtils {
         } catch (Exception e) {
             throw new RuntimeException("serialize failed.", e);
         } finally {
-            try {
-                if (bos != null) {
+            if (bos != null) {
+                try {
                     bos.close();
+                } catch (IOException e) {
+                    //ignore
                 }
-            } catch (IOException e) {
             }
 
-            try {
-                if (oos != null) {
+            if (oos != null) {
+                try {
                     oos.close();
+                } catch (IOException e) {
+                    //ignore
                 }
-            } catch (IOException e) {
             }
+
         }
         return bytes;
     }

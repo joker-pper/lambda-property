@@ -1,52 +1,56 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
 package com.joker17.lambda;
 
+import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.Arrays;
-
-import static org.junit.Assert.*;
 
 public class LambdaUtilsTest {
 
     @Test
-    public void test() {
-        assertEquals("id", LambdaPropertyUtils.getProperty(Model::getId));
-        assertEquals(Arrays.asList("id", "name"), LambdaPropertyUtils.getPropertyList(Model::getId, Model::getName));
-        assertArrayEquals(new String[]{"id", "name"}, LambdaPropertyUtils.getProperties(Model::getId, Model::getName));
+    public void testSerialize() {
+        Assert.assertNull(LambdaUtils.serialize(null));
+        Assert.assertNotNull(LambdaUtils.serialize(1));
     }
 
     @Test
-    public void testOther() {
-        assertEquals("checkBool", LambdaPropertyUtils.getProperty(Model::getCheckBool));
-        assertEquals("isCheckBool", LambdaPropertyUtils.getProperty(Model::getIsCheckBool));
-        assertEquals("check", LambdaPropertyUtils.getProperty(Model::isCheck));
-        assertEquals("intVal", LambdaPropertyUtils.getProperty(Model::getIntVal));
-        assertEquals("integer", LambdaPropertyUtils.getProperty(Model::getInteger));
-        assertEquals("n", LambdaPropertyUtils.getProperty(Model::getN));
+    public void testResolve() {
+        SerializedLambda serializedLambda = LambdaUtils.resolve(Model::getId);
+        Assert.assertNotNull(serializedLambda);
 
-        assertEquals("an", LambdaPropertyUtils.getProperty(Model::getAn));
+        //获取实现者的方法名称
+        Assert.assertEquals("getId", serializedLambda.getImplMethodName());
 
-        assertEquals("abNNs", LambdaPropertyUtils.getProperty(Model::getAbNNs));
+        //获取实现的 class 的名称
+        Assert.assertEquals(Model.class.getName(), serializedLambda.getImplClassName());
+        //获取实现的 class
+        Assert.assertEquals(Model.class, serializedLambda.getImplClass());
 
-        //中文
-        assertEquals("中文字符名", LambdaPropertyUtils.getProperty(Model::get中文字符名));
+        //获取接口 class名称
+        Assert.assertEquals(LambdaPropertyFunction.class.getName(), serializedLambda.getFunctionalInterfaceClassName());
+        //获取接口 class
+        Assert.assertEquals(LambdaPropertyFunction.class, serializedLambda.getFunctionalInterfaceClass());
 
-/*
+        //获取捕获此lambda的 class
+        Assert.assertEquals(LambdaUtilsTest.class.getName(), serializedLambda.getCapturingClassName());
+        //获取捕获此lambda的 class名称
+        Assert.assertEquals(LambdaUtilsTest.class, serializedLambda.getCapturingClass());
 
-        assertEquals("bN", LambdaPropertyUtils.getProperty(Model::getBN));
-        assertEquals("bNs", LambdaPropertyUtils.getProperty(Model::getBNs));
-        assertEquals("cN", LambdaPropertyUtils.getProperty(Model::getCN));
-*/
-        //若字段名第二个字母为大写，则不再将第一个字母转换为小写 （正确示例）
+        //instantiatedMethodTypeClass
+        Assert.assertEquals(Model.class, serializedLambda.getInstantiatedMethodTypeClass());
 
-        assertEquals("CN", LambdaPropertyUtils.getProperty(Model::getCN));
+        //同SerializedLambda原有方法
+        Assert.assertEquals("apply", serializedLambda.getFunctionalInterfaceMethodName());
+        Assert.assertNotNull(serializedLambda.getFunctionalInterfaceMethodSignature());
+        Assert.assertNotNull(serializedLambda.getImplMethodSignature());
+        Assert.assertNotNull(serializedLambda.getInstantiatedMethodType());
+        Assert.assertTrue(serializedLambda.getCapturedArgCount() >= 0);
+        Assert.assertTrue(serializedLambda.getImplMethodKind() >= 0);
 
-        //若字段名第二个字母为大写，则不再将第一个字母转换为小写 （错误示例）字段名: bN bNs
-        assertEquals("BN", LambdaPropertyUtils.getProperty(Model::getBN));
-        assertEquals("BNs", LambdaPropertyUtils.getProperty(Model::getBNs));
-
-        //第二个字母为大写时，首字母应为大写 （特殊示例，自定义getter方法可推断一致）
-        assertEquals("bNFromCustomGetter", LambdaPropertyUtils.getProperty(Model::getbNFromCustomGetter));
-
+        //toString
+        Assert.assertEquals("com.joker17.lambda.LambdaPropertyFunction -> Model::getId", serializedLambda.toString());
     }
 }

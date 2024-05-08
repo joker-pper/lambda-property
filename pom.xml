@@ -39,6 +39,10 @@
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <maven-javadoc-plugin.version>3.3.2</maven-javadoc-plugin.version>
         <lombok.version>1.18.24</lombok.version>
+        <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
+        <jacoco.path>${project.build.directory}/jacoco.exec</jacoco.path>
+        <jacoco.report-aggregate.phase>test</jacoco.report-aggregate.phase>
+        <jacoco.skip>false</jacoco.skip>
         <junit.version>4.13.1</junit.version>
     </properties>
 
@@ -133,6 +137,49 @@
                         <goals>
                             <goal>jar</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco-maven-plugin.version}</version>
+                <configuration>
+                    <skip>${jacoco.skip}</skip>
+                    <destFile>${jacoco.path}</destFile>
+                    <dataFile>${jacoco.path}</dataFile>
+                    <sessionId>jacoco_coverage</sessionId>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>pre-test</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+
+                    <execution>
+                        <id>post-unit-test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <dataFile>target/jacoco.exec</dataFile>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>report-aggregate</id>
+                        <phase>${jacoco.report-aggregate.phase}</phase>
+                        <goals>
+                            <goal>report-aggregate</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>target/site/jacoco-aggregate</outputDirectory>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
