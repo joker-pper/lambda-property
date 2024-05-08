@@ -2,6 +2,7 @@
 
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.joker-pper/lambda-property.svg?label=Maven%20Central)](https://central.sonatype.com/search?q=io.github.joker-pper:lambda-property)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![codecov](https://codecov.io/gh/joker-pper/lambda-property/branch/master/graph/badge.svg)](https://codecov.io/gh/joker-pper/lambda-property)
 
 
 *lambda-property是通过lambda表达式获取实体类的属性名称的工具包(基于mybatis-plus所提供的方法实现),告别魔法值避免修改字段名称所导致的隐藏bug*
