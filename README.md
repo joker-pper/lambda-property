@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 
-*lambda-property是通过lambda表达式获取实体类的属性名称的工具包(基于mybatis-plus所提供的方法实现)*
+*lambda-property是通过lambda表达式获取实体类的属性名称的工具包(基于mybatis-plus所提供的方法实现),告别魔法值避免修改字段名称所导致的隐藏bug*
 
 
 ## 使用方式
@@ -25,7 +25,7 @@ LambdaPropertyUtils.getProperty(Model::getId);
 ```
 
 ## 【命名】若字段名第二个字母为大写，则不再将第一个字母转换为小写（故第二个字母为大写时，第一个字母也应该为大写）
-### 除非生成的getter方法的字段名的第一个字母为小写 （lombok默认生成的getter的字段名的第一个字母为大写 ）
+### 除非生成的getter方法的字段名的第一个字母为小写 （lombok默认生成的getter的字段名的第一个字母为大写）
 
 
 String cN ==> getter: getCN() -> property: CN  
