@@ -6,7 +6,7 @@
 
     <groupId>io.github.joker-pper</groupId>
     <artifactId>lambda-property</artifactId>
-    <version>1.2.2-SNAPSHOT</version>
+    <version>1.2.3-SNAPSHOT</version>
     <name>lambda property</name>
     <description>通过lambda表达式获取实体类的属性名称的工具包</description>
     <url>https://github.com/joker-pper/lambda-property</url>
