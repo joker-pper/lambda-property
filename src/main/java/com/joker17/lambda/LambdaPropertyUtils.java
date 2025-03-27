@@ -15,9 +15,11 @@ public class LambdaPropertyUtils {
      * @param <T>
      * @return
      */
+    @SafeVarargs
+    @SuppressWarnings("varargs")
     public static <T> List<String> getPropertyList(LambdaPropertyFunction<T, ?>... propertyFunctions) {
         List<String> propertyList = new ArrayList<>(propertyFunctions.length);
-        for (LambdaPropertyFunction propertyFunction : propertyFunctions) {
+        for (LambdaPropertyFunction<T, ?> propertyFunction : propertyFunctions) {
             propertyList.add(getProperty(propertyFunction));
         }
         return propertyList;
@@ -30,9 +32,11 @@ public class LambdaPropertyUtils {
      * @param <T>
      * @return
      */
+    @SafeVarargs
+    @SuppressWarnings("varargs")
     public static <T> String[] getProperties(LambdaPropertyFunction<T, ?>... propertyFunctions) {
         List<String> propertyList = getPropertyList(propertyFunctions);
-        return propertyList.toArray(new String[propertyList.size()]);
+        return propertyList.toArray(new String[0]);
     }
 
     /**
