@@ -1,7 +1,7 @@
 ## lambda-property
 
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.joker-pper/lambda-property.svg?label=Maven%20Central)](https://central.sonatype.com/search?q=io.github.joker-pper:lambda-property)
-[![Last SNAPSHOT](https://img.shields.io/nexus/snapshots/https/s01.oss.sonatype.org/io.github.joker-pper/lambda-property?label=latest%20snapshot)](https://s01.oss.sonatype.org/content/repositories/snapshots/io/github/joker-pper/lambda-property/)
+[![Last SNAPSHOT](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Fcentral.sonatype.com%2Frepository%2Fmaven-snapshots%2Fio%2Fgithub%2Fjoker-pper%2Flambda-property%2Fmaven-metadata.xml&label=lastest%20snapshot)](https://central.sonatype.com/repository/maven-snapshots/io/github/joker-pper/lambda-property/maven-metadata.xml)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![codecov](https://codecov.io/gh/joker-pper/lambda-property/branch/master/graph/badge.svg)](https://codecov.io/gh/joker-pper/lambda-property)
 [![Upload coverage reports to Codecov](https://github.com/joker-pper/lambda-property/actions/workflows/ci.yml/badge.svg)](https://github.com/joker-pper/lambda-property/actions/workflows/ci.yml)
